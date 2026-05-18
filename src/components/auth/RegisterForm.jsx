@@ -23,7 +23,6 @@ export default function RegisterForm({
           value={form.nombre}
           onChange={onChange}
           autoComplete="given-name"
-          required
         />
         <InputField
           label="Apellidos"
@@ -32,7 +31,6 @@ export default function RegisterForm({
           value={form.apellido}
           onChange={onChange}
           autoComplete="family-name"
-          required
         />
       </div>
 
@@ -43,7 +41,6 @@ export default function RegisterForm({
         value={form.username}
         onChange={onChange}
         autoComplete="username"
-        required
       />
 
       <InputField
@@ -54,7 +51,6 @@ export default function RegisterForm({
         value={form.correo}
         onChange={onChange}
         autoComplete="email"
-        required
       />
 
       <InputField
@@ -65,7 +61,6 @@ export default function RegisterForm({
         value={form.contrasena}
         onChange={onChange}
         autoComplete="new-password"
-        required
       />
 
       <AlertMessage type="danger" message={error} />
