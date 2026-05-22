@@ -49,23 +49,53 @@ export default function Login() {
   // ── Handlers login ──
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    setLoginLoading2(true);
     setLoginError2("");
+  
+    if (!loginForm.username.trim() || !loginForm.password.trim()) {
+      setLoginError2("Todos los campos son obligatorios.");
+      return;
+    }
+  
+    setLoginLoading2(true);
+  
     try {
       const result = await apiRequest("/login", {
         method: "POST",
-        body: JSON.stringify({ username: loginForm.username, password: loginForm.password }),
+        body: JSON.stringify({
+          username: loginForm.username.trim(),
+          password: loginForm.password,
+        }),
       });
+  
+      if (result.user?.active == 0) {
+        setLoginError2("Tu cuenta está inactiva. Contacta al administrador.");
+        return;
+      }
+  
       localStorage.setItem("token", result.token);
       localStorage.setItem("user", JSON.stringify(result.user));
+  
       const rol = (result.user?.rol || "").toLowerCase();
-      if(result.user?.active == 0) {
-        setLoginError2("No fue posible iniciar sesión");
-      }else{
-        navigate(rol === "administrador" || rol === "bibliotecario" ? "/dashboard" : "/books");
-      }
+  
+      navigate(
+        rol === "administrador" || rol === "bibliotecario"
+          ? "/dashboard"
+          : "/books"
+      );
     } catch (err) {
-      setLoginError2(err.message || "No fue posible iniciar sesión");
+      const message = err.message || "";
+  
+      if (message.includes("401")) {
+        setLoginError2("Credenciales incorrectas.");
+        return;
+      }
+  
+      if (message.includes("400")) {
+        setLoginError2("Usuario y contraseña son obligatorios.");
+        return;
+      }
+  
+      setLoginError2("No fue posible iniciar sesión. Intenta nuevamente.");
     } finally {
       setLoginLoading2(false);
     }
