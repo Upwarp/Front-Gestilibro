@@ -16,7 +16,10 @@ export async function apiRequest(endpoint, options = {}) {
 
   if (!response.ok) {
     throw new Error(
-      data?.message || data?.messages?.error || `Error HTTP ${response.status}`
+      data?.error ||
+      data?.message ||
+      data?.messages?.error ||
+      `Error HTTP ${response.status}`
     );
   }
 
