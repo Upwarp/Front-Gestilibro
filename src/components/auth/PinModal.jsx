@@ -3,7 +3,7 @@ import { FaCheckCircle, FaEnvelope } from "react-icons/fa";
 import AlertMessage from "../ui/AlertMessage";
 import PinDigit from "./PinDigit";
 
-const PIN_LENGTH = 6;
+const PIN_LENGTH = 4;
 
 /**
  * PinModal – modal de verificación de PIN por correo.
