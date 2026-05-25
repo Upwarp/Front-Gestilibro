@@ -77,11 +77,11 @@ export default function Login() {
   
       const rol = (result.user?.rol || "").toLowerCase();
   
-      navigate(
-        rol === "administrador" || rol === "bibliotecario"
-          ? "/dashboard"
-          : "/books"
-      );
+       navigate(
+          rol === "administrador" || rol === "bibliotecario"
+            ? "/dashboard"
+            : "/libros"
+        );
     } catch (err) {
       const message = err.message || "";
   
