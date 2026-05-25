@@ -10,7 +10,8 @@ body,
 }
 
 body {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* ── PAGE ── */
@@ -452,4 +453,45 @@ body {
 .pin-resend-btn:disabled {
   color: #aaa;
   cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .login-page {
+    align-items: flex-start;
+    padding: 24px 16px;
+    box-sizing: border-box;
+  }
+
+  .login-container {
+    width: 100%;
+    max-width: 380px;
+    padding: 28px 22px 24px;
+  }
+
+  .login-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .login-tabs {
+    margin-bottom: 16px;
+  }
+
+  .pin-modal {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 16px;
+    padding: 32px 22px 26px;
+    box-sizing: border-box;
+  }
+
+  .pin-fields {
+    gap: 8px;
+  }
+
+  .pin-input {
+    width: 40px !important;
+    height: 48px;
+    font-size: 20px !important;
+  }
 }
