@@ -49,7 +49,14 @@ export default function AppRouter() {
           <Route path="/prestamos/editar/:id" element={<LoanEdit />} />
         </Route>
 
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route
+          path="*"
+          element={
+            localStorage.getItem("token")
+              ? <Navigate to="/dashboard" replace />
+              : <Navigate to="/login" replace />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
