@@ -64,14 +64,14 @@ export default function Sidebar() {
 
           {rol === "administrador" && (
             <>
-              <Link to="/users" className={isActive("/users") ? "active" : ""}>
+              <Link to="/usuarios" className={isActive("/usuarios") ? "active" : ""}>
                 <FaUser />
                 <span>Usuarios</span>
               </Link>
 
               <Link
-                to="/categories"
-                className={isActive("/categories") ? "active" : ""}
+                to="/categorias"
+                className={isActive("/categorias") ? "active" : ""}
               >
                 <FaTags />
                 <span>Categorías</span>
@@ -79,12 +79,12 @@ export default function Sidebar() {
             </>
           )}
 
-          <Link to="/books" className={isActive("/books") ? "active" : ""}>
+          <Link to="/libros" className={isActive("/libros") ? "active" : ""}>
             <FaBookOpen />
             <span>Libros</span>
           </Link>
 
-          <Link to="/loans" className={isActive("/loans") ? "active" : ""}>
+          <Link to="/prestamos" className={isActive("/prestamos") ? "active" : ""}>
             <FaHandshake />
             <span>Préstamos</span>
           </Link>
