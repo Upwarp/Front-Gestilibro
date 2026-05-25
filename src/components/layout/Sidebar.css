@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-shrink: 0;
 }
 
 .sidebar-title {
@@ -19,6 +20,7 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 }
 
 .sidebar-user {
@@ -90,7 +92,85 @@
 
 .page-content {
   flex: 1;
+  min-width: 0;
   padding: 24px;
   overflow-x: auto;
   background: white;
+  box-sizing: border-box;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 210px;
+    padding: 20px 12px;
+  }
+
+  .sidebar-title {
+    font-size: 22px;
+  }
+
+  .sidebar-user-image {
+    width: 64px;
+    height: 64px;
+  }
+
+  .sidebar-nav a,
+  .sidebar-logout {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .page-content {
+    padding: 18px;
+  }
+}
+
+/* Celular */
+@media (max-width: 768px) {
+  .page-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    padding: 12px;
+  }
+
+  .sidebar-title {
+    margin-bottom: 12px;
+    font-size: 20px;
+  }
+
+  .sidebar-user {
+    display: none;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+
+  .sidebar-nav a {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+
+  .sidebar-logout {
+    margin-top: 10px;
+    justify-content: center;
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+
+  .page-content {
+    width: 100%;
+    padding: 14px;
+    overflow-x: auto;
+  }
 }
