@@ -1,35 +1,48 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaHandshake, FaUsers } from "react-icons/fa6";
+
 import PageLayout from "../../components/layout/PageLayout";
 import PageHeader from "../../components/ui/PageHeader";
 import AlertMessage from "../../components/ui/AlertMessage";
 import TableStatusRow from "../../components/ui/TableStatusRow";
 import LoanTableRow from "../../components/loans/LoanTableRow";
+
 import { useApiList } from "../../hooks/useApiList";
 import { useAuthUser } from "../../hooks/useAuthUser";
 import { apiRequest } from "../../services/api";
+
 import "./LoansList.css";
 
 export default function LoansList() {
   const { authUser, rol, canManage } = useAuthUser();
 
   const canCreateLoan = canManage || rol === "estudiante";
-  console.log(canCreateLoan);
+
   const prestamosEndpoint = canManage
     ? "/prestamos"
-    : /prestamos?id_usuario=${authUser.id}&rol=${encodeURIComponent(authUser.rol)};
+    : `/prestamos?id_usuario=${authUser.id}&rol=${encodeURIComponent(authUser.rol)}`;
 
-  const { data: loans, loading, error: fetchError, reload } = useApiList(prestamosEndpoint);
+  const {
+    data: loans,
+    loading,
+    error: fetchError,
+    reload,
+  } = useApiList(prestamosEndpoint);
+
   const [actionMsg, setActionMsg] = useState({ type: "", text: "" });
 
   const handleDelete = async (id) => {
     if (!window.confirm("¿Seguro que deseas eliminar este préstamo?")) return;
+
     try {
       await apiRequest(`/prestamos/${id}`, { method: "DELETE" });
       reload();
     } catch (err) {
-      setActionMsg({ type: "danger", text: err.message || "No fue posible eliminar el préstamo" });
+      setActionMsg({
+        type: "danger",
+        text: err.message || "No fue posible eliminar el préstamo",
+      });
     }
   };
 
@@ -37,33 +50,45 @@ export default function LoansList() {
 
   return (
     <PageLayout>
-      <AlertMessage type={actionMsg.type} message={actionMsg.text} onClose={() => setActionMsg({ type: "", text: "" })} />
+      <AlertMessage
+        type={actionMsg.type}
+        message={actionMsg.text}
+        onClose={() => setActionMsg({ type: "", text: "" })}
+      />
 
       <PageHeader
         icon={<FaUsers />}
         title="Gestión de Préstamos"
         action={
           canCreateLoan && (
-            <Link to="/prestamos/nuevo" className="btn-new-loan">
+            <Link to="/loans/create" className="btn-new-loan">
               <FaHandshake />
               <span>Nuevo Préstamo</span>
             </Link>
-            )
-          }
-        />
+          )
+        }
+      />
 
       <div className="loans-table-wrapper">
         <table className="loans-table">
           <thead>
             <tr>
-              <th>ID</th><th>Usuario</th><th>Libro</th>
-              <th>Fecha Préstamo</th><th>Fecha Devolución</th><th>Estado</th>
+              <th>ID</th>
+              <th>Usuario</th>
+              <th>Libro</th>
+              <th>Fecha Préstamo</th>
+              <th>Fecha Devolución</th>
+              <th>Estado</th>
               {canManage && <th>Acciones</th>}
             </tr>
           </thead>
+
           <tbody>
             {loading ? (
-              <TableStatusRow colSpan={colSpan} message="Cargando préstamos..." />
+              <TableStatusRow
+                colSpan={colSpan}
+                message="Cargando préstamos..."
+              />
             ) : fetchError ? (
               <TableStatusRow colSpan={colSpan} message={fetchError} />
             ) : loans.length > 0 ? (
@@ -76,7 +101,10 @@ export default function LoansList() {
                 />
               ))
             ) : (
-              <TableStatusRow colSpan={colSpan} message="No hay préstamos registrados" />
+              <TableStatusRow
+                colSpan={colSpan}
+                message="No hay préstamos registrados"
+              />
             )}
           </tbody>
         </table>
