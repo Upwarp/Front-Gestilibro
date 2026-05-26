@@ -1,3 +1,4 @@
+import "./PageHeader.css";
 /**
  * PageHeader – encabezado de sección con título (+ icono) y acción opcional.
  * Props:
