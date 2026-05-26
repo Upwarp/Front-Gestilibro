@@ -43,11 +43,13 @@ export default function LoansList() {
         icon={<FaUsers />}
         title="Gestión de Préstamos"
         action={
-          <Link to="/prestamos/nuevo" className="btn-new-loan">
-            <FaHandshake />
-            <span>Nuevo Préstamo</span>
-          </Link>
-        }
+          canCreateLoan && (
+            <Link to="/prestamos/nuevo" className="btn-new-loan">
+              <FaHandshake />
+              <span>Nuevo Préstamo</span>
+            </Link>
+            )
+          }
         />
 
       <div className="loans-table-wrapper">
