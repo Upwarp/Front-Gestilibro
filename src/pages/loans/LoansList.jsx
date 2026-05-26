@@ -12,8 +12,13 @@ import { apiRequest } from "../../services/api";
 import "./LoansList.css";
 
 export default function LoansList() {
-  const { canManage } = useAuthUser();
-  const { data: loans, loading, error: fetchError, reload } = useApiList("/prestamos");
+  const { authUser, rol, canManage } = useAuthUser();
+
+const prestamosEndpoint = canManage
+  ? "/prestamos"
+  : /prestamos?id_usuario=${authUser.id}&rol=${encodeURIComponent(authUser.rol)};
+
+  const { data: loans, loading, error: fetchError, reload } = useApiList(prestamosEndpoint);
   const [actionMsg, setActionMsg] = useState({ type: "", text: "" });
 
   const handleDelete = async (id) => {
