@@ -68,7 +68,7 @@ export default function LoanCreate() {
       });
       setSuccess("Préstamo guardado correctamente.");
       resetForm();
-      setTimeout(() => navigate("/loans"), 1000);
+      setTimeout(() => navigate("/prestamos"), 1000);
     } catch (err) {
       setError(err.message || "Error al guardar el préstamo.");
     } finally {
@@ -136,7 +136,7 @@ export default function LoanCreate() {
           </div>
 
           <FormActions
-            cancelTo="/loans"
+            cancelTo="/prestamos"
             submitLabel="Guardar"
             loadingLabel="Guardando..."
             loading={loading}
