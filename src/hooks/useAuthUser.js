@@ -22,7 +22,7 @@ export function useAuthUser() {
       : "Usuario",
     rol: rawUser?.rol || "Sin rol",
     foto: "/images/usuario.jpg",
-    id: rawUser?.id_usuario ?? null,
+    id: rawUser?.id_usuario ?? rawUser?.id ?? null,
     nombre: rawUser?.nombre ?? "",
     apellido: rawUser?.apellido ?? "",
   };
