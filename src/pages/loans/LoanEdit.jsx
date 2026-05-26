@@ -52,7 +52,11 @@ export default function LoanEdit() {
     (async () => {
       try {
         setLoadingLoan(true);
-        const data = await apiRequest(`/prestamos/${id}`);
+        const endpoint = canManage
+  ? /prestamos/${id}
+  : /prestamos/${id}?id_usuario=${authUser.id}&rol=${encodeURIComponent(authUser.rol)};
+
+const data = await apiRequest(endpoint);
         setForm({
           id_usuario: data.id_usuario ? String(data.id_usuario) : "",
           id_libro: data.id_libro ? String(data.id_libro) : "",
