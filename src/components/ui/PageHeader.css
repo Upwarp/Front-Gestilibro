@@ -1,0 +1,57 @@
+.page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.page-header-action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.btn-new-user,
+.btn-new-category,
+.btn-new-book,
+.btn-new-loan {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 46px;
+  padding: 0 18px;
+
+  background: #198754;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+
+  margin: 0;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.btn-new-user:hover,
+.btn-new-category:hover,
+.btn-new-book:hover,
+.btn-new-loan:hover {
+  background: #157347;
+}
