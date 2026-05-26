@@ -51,7 +51,8 @@
   background: #fff;
   border-radius: 14px;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
-  padding: 18px;
+  padding: 0;
+  overflow: hidden;
 }
 
 .users-table-wrapper {
