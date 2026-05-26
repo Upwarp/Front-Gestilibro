@@ -41,14 +41,12 @@ const prestamosEndpoint = canManage
         icon={<FaUsers />}
         title="Gestión de Préstamos"
         action={
-          canManage && (
-            <Link to="/prestamos/nuevo" className="btn-new-loan">
-              <FaHandshake />
-              <span>Nuevo Préstamo</span>
-            </Link>
-          )
+          <Link to="/prestamos/nuevo" className="btn-new-loan">
+            <FaHandshake />
+            <span>Nuevo Préstamo</span>
+          </Link>
         }
-      />
+        />
 
       <div className="loans-table-wrapper">
         <table className="loans-table">
