@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 18px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 18px;
 }
 
 .page-title {
@@ -22,16 +22,18 @@
   justify-content: flex-start;
 }
 
-.btn-new-user,
-.btn-new-category,
-.btn-new-book,
-.btn-new-loan {
+
+.page-header-action .btn-new-user,
+.page-header-action .btn-new-category,
+.page-header-action .btn-new-book,
+.page-header-action .btn-new-loan {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
 
   height: 38px;
+  min-height: 0;
   padding: 0 14px;
 
   background: #198754;
@@ -49,9 +51,19 @@
   transition: 0.25s ease;
 }
 
-.btn-new-user:hover,
-.btn-new-category:hover,
-.btn-new-book:hover,
-.btn-new-loan:hover {
+
+.page-header-action .btn-new-user svg,
+.page-header-action .btn-new-category svg,
+.page-header-action .btn-new-book svg,
+.page-header-action .btn-new-loan svg {
+  font-size: 13px;
+}
+
+
+.page-header-action .btn-new-user:hover,
+.page-header-action .btn-new-category:hover,
+.page-header-action .btn-new-book:hover,
+.page-header-action .btn-new-loan:hover {
   background: #157347;
+  color: #fff;
 }
