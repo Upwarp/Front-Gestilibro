@@ -123,7 +123,7 @@ export default function Login() {
     setPinError("");
     setPinSuccess("");
     try {
-      await apiRequest("/verify-pin", {
+      await apiRequest("/verifypin", {
         method: "POST",
         body: JSON.stringify({ correo: registerForm.correo, pin }),
       });
@@ -145,7 +145,7 @@ export default function Login() {
     setPinError("");
     setPinSuccess("");
     try {
-      await apiRequest("/resend-pin", {
+      await apiRequest("/resendpin", {
         method: "POST",
         body: JSON.stringify({ correo: registerForm.correo }),
       });
