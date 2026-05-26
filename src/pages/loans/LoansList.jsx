@@ -15,7 +15,7 @@ export default function LoansList() {
   const { authUser, rol, canManage } = useAuthUser();
 
   const canCreateLoan = canManage || rol === "estudiante";
-  console.log(canCreateLoan)
+  console.log(canCreateLoan);
   const prestamosEndpoint = canManage
     ? "/prestamos"
     : /prestamos?id_usuario=${authUser.id}&rol=${encodeURIComponent(authUser.rol)};
