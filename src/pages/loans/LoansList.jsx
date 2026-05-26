@@ -37,7 +37,7 @@ export default function LoansList() {
         title="Gestión de Préstamos"
         action={
           canManage && (
-            <Link to="/loans/create" className="btn-new-loan">
+            <Link to="/prestamos/nuevo" className="btn-new-loan">
               <FaHandshake />
               <span>Nuevo Préstamo</span>
             </Link>
