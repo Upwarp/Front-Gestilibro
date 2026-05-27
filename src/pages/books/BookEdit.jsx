@@ -121,7 +121,7 @@ export default function BookEdit() {
 
             <SelectField label="Disponibilidad" name="disponibilidad" value={form.disponibilidad} onChange={handleChange} disabled={!bookFound} options={disponibilidadOptions} placeholder={null} />
 
-            <FormActions cancelTo="/books" submitLabel="Actualizar" loadingLabel="Actualizando..." loading={saving} disabled={!bookFound} />
+            <FormActions cancelTo="/libros" submitLabel="Actualizar" loadingLabel="Actualizando..." loading={saving} disabled={!bookFound} />
           </form>
         )}
       </FormCard>
