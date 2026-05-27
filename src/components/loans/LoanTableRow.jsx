@@ -21,7 +21,7 @@ export default function LoanTableRow({ loan, canManage, onDelete }) {
       {canManage && (
         <td>
           <TableActions
-            editTo={`/loans/edit/${loan.id_prestamo}`}
+            editTo={`/prestamos/editar/${loan.id_prestamo}`}
             onDelete={() => onDelete(loan.id_prestamo)}
             showDelete={!isPrestado}
           />
