@@ -20,7 +20,7 @@ export default function BookTableRow({ book, canManage, onDelete }) {
       {canManage && (
         <td>
           <TableActions
-            editTo={`/books/edit/${book.id_libro}`}
+            editTo={`/libros/editar/${book.id_libro}`}
             onDelete={() => onDelete(book.id_libro)}
           />
         </td>
