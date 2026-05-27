@@ -19,7 +19,7 @@ export default function UserTableRow({ user, onDelete }) {
       <td>{isActive ? "Sí" : "No"}</td>
       <td className="text-center">
         <TableActions
-          editTo={`/users/edit/${user.id_usuario}`}
+          editTo={`/usuarios/editar/${user.id_usuario}`}
           onDelete={() => onDelete(user.id_usuario)}
         />
       </td>
