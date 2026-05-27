@@ -56,16 +56,14 @@ export default function LoansList() {
         onClose={() => setActionMsg({ type: "", text: "" })}
       />
 
-      <PageHeader
+       <PageHeader
         icon={<FaUsers />}
         title="Gestión de Préstamos"
         action={
-          canCreateLoan && (
-            <Link to="/loans/create" className="btn-new-loan">
-              <FaHandshake />
-              <span>Nuevo Préstamo</span>
-            </Link>
-          )
+          <Link to="/prestamos/nuevo" className="btn-new-loan">
+            <FaHandshake />
+            <span>Nuevo Préstamo</span>
+          </Link>
         }
       />
 
