@@ -23,10 +23,15 @@ export default function LoanEdit() {
   const navigate = useNavigate();
   const { authUser, canManage } = useAuthUser();
 
-  const { form, setForm, handleChange, error, setError, success, setSuccess } = useForm({
-    id_usuario: authUser.id ? String(authUser.id) : "",
-    id_libro: "", fecha_prestamo: "", fecha_devolucion: "", estado: "prestado",
-  });
+  const { form, setForm, handleChange, error, setError, success, setSuccess } =
+    useForm({
+      id_usuario: authUser.id ? String(authUser.id) : "",
+      id_libro: "",
+      fecha_prestamo: "",
+      fecha_devolucion: "",
+      estado: "prestado",
+    });
+
   const [loadingLoan, setLoadingLoan] = useState(true);
   const [saving, setSaving] = useState(false);
   const [loanFound, setLoanFound] = useState(true);
@@ -35,28 +40,43 @@ export default function LoanEdit() {
   const { data: libros, loading: loadingBooks } = useApiList("/libros");
 
   const usuarioOptions = useMemo(
-    () => usuarios.map((u) => ({ value: u.id_usuario, label: `${u.nombre} ${u.apellido}` })),
+    () =>
+      usuarios.map((u) => ({
+        value: u.id_usuario,
+        label: `${u.nombre} ${u.apellido}`,
+      })),
     [usuarios]
   );
+
   const libroOptions = useMemo(
-    () => libros.map((l) => ({ value: l.id_libro, label: l.titulo })),
+    () =>
+      libros.map((l) => ({
+        value: l.id_libro,
+        label: l.titulo,
+      })),
     [libros]
   );
 
   const usuarioActual = useMemo(
-    () => usuarios.find((u) => String(u.id_usuario) === String(form.id_usuario)) || null,
+    () =>
+      usuarios.find((u) => String(u.id_usuario) === String(form.id_usuario)) ||
+      null,
     [usuarios, form.id_usuario]
   );
 
   useEffect(() => {
-    (async () => {
+    const loadLoan = async () => {
       try {
         setLoadingLoan(true);
-        const endpoint = canManage
-  ? /prestamos/${id}
-  : /prestamos/${id}?id_usuario=${authUser.id}&rol=${encodeURIComponent(authUser.rol)};
 
-const data = await apiRequest(endpoint);
+        const endpoint = canManage
+          ? `/prestamos/${id}`
+          : `/prestamos/${id}?id_usuario=${authUser.id}&rol=${encodeURIComponent(
+              authUser.rol
+            )}`;
+
+        const data = await apiRequest(endpoint);
+
         setForm({
           id_usuario: data.id_usuario ? String(data.id_usuario) : "",
           id_libro: data.id_libro ? String(data.id_libro) : "",
@@ -64,6 +84,7 @@ const data = await apiRequest(endpoint);
           fecha_devolucion: data.fecha_devolucion || "",
           estado: data.estado || "prestado",
         });
+
         setLoanFound(true);
       } catch (err) {
         setLoanFound(false);
@@ -71,31 +92,46 @@ const data = await apiRequest(endpoint);
       } finally {
         setLoadingLoan(false);
       }
-    })();
-  }, [id]);
+    };
+
+    loadLoan();
+  }, [id, canManage, authUser.id, authUser.rol, setForm, setError]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!form.id_usuario) return setError("Debe seleccionar un usuario.");
     if (!form.id_libro) return setError("Debe seleccionar un libro.");
-    if (!form.fecha_prestamo) return setError("Debe seleccionar la fecha de préstamo.");
-    if (form.fecha_devolucion && form.fecha_devolucion < form.fecha_prestamo)
-      return setError("La fecha de devolución no puede ser menor que la fecha de préstamo.");
+    if (!form.fecha_prestamo)
+      return setError("Debe seleccionar la fecha de préstamo.");
+
+    if (form.fecha_devolucion && form.fecha_devolucion < form.fecha_prestamo) {
+      return setError(
+        "La fecha de devolución no puede ser menor que la fecha de préstamo."
+      );
+    }
+
     if (!form.estado) return setError("Debe seleccionar un estado.");
 
     try {
-      setSaving(true); setError(""); setSuccess("");
+      setSaving(true);
+      setError("");
+      setSuccess("");
+
       await apiRequest(`/prestamos/${id}`, {
         method: "PUT",
         body: JSON.stringify({
-          id_usuario: Number(form.id_usuario), id_libro: Number(form.id_libro),
+          id_usuario: Number(form.id_usuario),
+          id_libro: Number(form.id_libro),
           fecha_prestamo: form.fecha_prestamo,
           fecha_devolucion: form.fecha_devolucion || null,
           estado: form.estado,
         }),
       });
+
       setSuccess("Préstamo actualizado correctamente.");
-      setTimeout(() => navigate("/loans"), 1000);
+
+      setTimeout(() => navigate("/prestamos"), 1000);
     } catch (err) {
       setError(err.message || "No fue posible actualizar el préstamo.");
     } finally {
@@ -106,8 +142,17 @@ const data = await apiRequest(endpoint);
   return (
     <PageLayout>
       <FormCard icon={null} title="Editar Préstamo">
-        <AlertMessage type="danger" message={error} onClose={() => setError("")} />
-        <AlertMessage type="success" message={success} onClose={() => setSuccess("")} />
+        <AlertMessage
+          type="danger"
+          message={error}
+          onClose={() => setError("")}
+        />
+
+        <AlertMessage
+          type="success"
+          message={success}
+          onClose={() => setSuccess("")}
+        />
 
         {loadingLoan ? (
           <AlertMessage type="info" message="Cargando préstamo..." />
@@ -121,12 +166,15 @@ const data = await apiRequest(endpoint);
                 onChange={handleChange}
                 required
                 disabled={!loanFound || loadingUsers}
-                placeholder={loadingUsers ? "Cargando usuarios..." : "Seleccione un usuario"}
+                placeholder={
+                  loadingUsers ? "Cargando usuarios..." : "Seleccione un usuario"
+                }
                 options={usuarioOptions}
               />
             ) : (
               <>
                 <input type="hidden" name="id_usuario" value={form.id_usuario} />
+
                 <InputField
                   label="Usuario"
                   name="_usuario_display"
@@ -147,7 +195,9 @@ const data = await apiRequest(endpoint);
               onChange={handleChange}
               required
               disabled={!loanFound || loadingBooks}
-              placeholder={loadingBooks ? "Cargando libros..." : "Seleccione un libro"}
+              placeholder={
+                loadingBooks ? "Cargando libros..." : "Seleccione un libro"
+              }
               options={libroOptions}
             />
 
@@ -160,6 +210,7 @@ const data = await apiRequest(endpoint);
               required
               disabled={!loanFound}
             />
+
             <InputField
               label="Fecha de Devolución"
               name="fecha_devolucion"
@@ -181,7 +232,7 @@ const data = await apiRequest(endpoint);
             />
 
             <FormActions
-              cancelTo="/loans"
+              cancelTo="/prestamos"
               submitLabel="Actualizar"
               loadingLabel="Actualizando..."
               loading={saving}
