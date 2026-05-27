@@ -16,11 +16,24 @@
 
     const handleDelete = async (id) => {
       if (!window.confirm("¿Seguro que deseas eliminar este usuario?")) return;
+    
       try {
         await apiRequest(`/usuarios/${id}`, { method: "DELETE" });
         reload();
       } catch (err) {
-        setActionMsg({ type: "danger", text: err.message || "No fue posible eliminar el usuario" });
+        const errorMessage = String(err.message || "").toLowerCase();
+    
+        const message =
+          errorMessage.includes("fk_prestamo_usuario") ||
+          errorMessage.includes("foreign key") ||
+          errorMessage.includes("prestamo")
+            ? "No se puede eliminar el usuario porque tiene préstamos activos."
+            : err.message || "No fue posible eliminar el usuario.";
+    
+        setActionMsg({
+          type: "danger",
+          text: message,
+        });
       }
     };
 
