@@ -20,7 +20,20 @@ export default function BooksList() {
 
   const filteredBooks = useMemo(() => {
     if (!filter) return books;
-    return books.filter((b) => b.disponibilidad === filter);
+  
+    return books.filter((book) => {
+      const cantidad = Number(book.cantidad ?? 0);
+  
+      if (filter === "disponible") {
+        return cantidad > 0;
+      }
+  
+      if (filter === "no disponible") {
+        return cantidad <= 0;
+      }
+  
+      return true;
+    });
   }, [books, filter]);
 
   const handleDelete = async (id) => {
