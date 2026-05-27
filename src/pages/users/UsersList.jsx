@@ -32,7 +32,7 @@
           icon={<FaUsers />}
           title="Gestión de Usuarios"
           action={
-            <Link to="/users/create" className="btn-new-user">
+            <Link to="/usuarios/nuevo" className="btn-new-user">
               <FaUserPlus />
               <span>Nuevo Usuario</span>
             </Link>
