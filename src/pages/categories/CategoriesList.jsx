@@ -36,7 +36,7 @@ export default function CategoriesList() {
         icon={<FaTags />}
         title="Gestión de Categorías"
         action={
-          <Link to="/categories/create" className="btn-new-category">
+          <Link to="/categorias/nueva" className="btn-new-category">
             <FaTag />
             <span>Nueva Categoría</span>
           </Link>
