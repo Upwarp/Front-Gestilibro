@@ -43,9 +43,18 @@ export default function LoanCreate() {
     () => usuarios.map((u) => ({ value: u.id_usuario, label: `${u.nombre} ${u.apellido}` })),
     [usuarios]
   );
-  const libroOptions = useMemo(
-    () => libros.map((l) => ({ value: l.id_libro, label: `${l.titulo} (Disponibles: ${l.cantidad})` })),
+  const librosDisponibles = useMemo(
+    () => libros.filter((l) => Number(l.cantidad) > 0),
     [libros]
+  );
+  
+  const libroOptions = useMemo(
+    () =>
+      librosDisponibles.map((l) => ({
+        value: l.id_libro,
+        label: `${l.titulo} (Disponibles: ${l.cantidad})`,
+      })),
+    [librosDisponibles]
   );
 
   const handleSubmit = async (e) => {
