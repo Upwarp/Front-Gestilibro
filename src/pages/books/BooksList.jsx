@@ -58,7 +58,7 @@ export default function BooksList() {
         title="Gestión de Libros"
         action={
           canManage && (
-            <Link to="/books/create" className="btn-new-book">
+            <Link to="/libros/nuevo" className="btn-new-book">
               <FaBookMedical />
               <span>Nuevo Libro</span>
             </Link>
