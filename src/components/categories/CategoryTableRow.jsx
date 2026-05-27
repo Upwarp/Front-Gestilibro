@@ -11,7 +11,7 @@ export default function CategoryTableRow({ category, onDelete }) {
       <td>{category.descripcion}</td>
       <td>
         <TableActions
-          editTo={`/categories/edit/${category.id_categoria}`}
+          editTo={`/categorias/editar/${category.id_categoria}`}
           onDelete={() => onDelete(category.id_categoria)}
         />
       </td>
