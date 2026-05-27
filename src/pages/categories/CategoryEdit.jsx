@@ -96,7 +96,7 @@ export default function CategoryEdit() {
             />
 
             <FormActions
-              cancelTo="/categories"
+              cancelTo="/categorias"
               submitLabel="Actualizar"
               loadingLabel="Actualizando..."
               loading={saving}
