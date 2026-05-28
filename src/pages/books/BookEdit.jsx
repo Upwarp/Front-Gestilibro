@@ -86,7 +86,7 @@ export default function BookEdit() {
         }),
       });
       setSuccess("Libro actualizado correctamente.");
-      setTimeout(() => navigate("/books"), 1000);
+      setTimeout(() => navigate("/libros"), 1000);
     } catch (err) {
       setError(err.message || "No fue posible actualizar el libro.");
     } finally {
