@@ -91,7 +91,7 @@ export default function LoanCreate() {
         <AlertMessage type="danger" message={formError} onClose={() => setError("")} />
         <AlertMessage type="success" message={success} onClose={() => setSuccess("")} />
         {libros.length === 0 && (
-          <AlertMessage type="warning" message="No hay libros disponibles." />
+          <AlertMessage type="warning" message="Cargando ..." />
         )}
 
         <form onSubmit={handleSubmit}>
