@@ -99,7 +99,7 @@ export default function UserEdit() {
             <InputField label="PIN" name="pin" maxLength="4" value={form.pin} onChange={handleChange} disabled={!userFound} />
             <CheckboxField label="Activo" name="active" id="active" checked={form.active} onChange={handleChange} disabled={!userFound} />
 
-            <FormActions cancelTo="/users" submitLabel="Actualizar" loadingLabel="Actualizando..." loading={saving} disabled={!userFound} />
+            <FormActions cancelTo="/usuarios" submitLabel="Actualizar" loadingLabel="Actualizando..." loading={saving} disabled={!userFound} />
           </form>
         )}
       </FormCard>
