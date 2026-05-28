@@ -62,7 +62,7 @@ export default function CategoryEdit() {
         }),
       });
       setSuccess("Categoría actualizada correctamente.");
-      setTimeout(() => navigate("/categories"), 1000);
+      setTimeout(() => navigate("/categorias"), 1000);
     } catch (err) {
       setError(err.message || "Error al actualizar la categoría.");
     } finally {
