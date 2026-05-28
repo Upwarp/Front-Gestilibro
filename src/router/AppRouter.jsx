@@ -23,6 +23,10 @@ import LoansList from "../pages/loans/LoansList";
 import LoanCreate from "../pages/loans/LoanCreate";
 import LoanEdit from "../pages/loans/LoanEdit";
 
+const ADMIN = ["administrador"];
+const STAFF = ["administrador", "bibliotecario"];
+const ALL_AUTH = ["administrador", "bibliotecario", "estudiante"];
+
 export default function AppRouter() {
   return (
     <BrowserRouter>
@@ -30,35 +34,129 @@ export default function AppRouter() {
         <Route path="/login" element={<Login />} />
 
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/" element={<RoleHome />} />
 
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              <RoleRoute allowedRoles={STAFF}>
+                <Dashboard />
+              </RoleRoute>
+            }
+          />
 
-          <Route path="/categorias" element={<CategoriesList />} />
-          <Route path="/categorias/nueva" element={<CategoryCreate />} />
-          <Route path="/categorias/editar/:id" element={<CategoryEdit />} />
+          <Route
+            path="/usuarios"
+            element={
+              <RoleRoute allowedRoles={ADMIN}>
+                <UsersList />
+              </RoleRoute>
+            }
+          />
 
-          <Route path="/libros" element={<BooksList />} />
-          <Route path="/libros/nuevo" element={<BookCreate />} />
-          <Route path="/libros/editar/:id" element={<BookEdit />} />
+          <Route
+            path="/usuarios/nuevo"
+            element={
+              <RoleRoute allowedRoles={ADMIN}>
+                <UserCreate />
+              </RoleRoute>
+            }
+          />
 
-          <Route path="/usuarios" element={<UsersList />} />
-          <Route path="/usuarios/nuevo" element={<UserCreate />} />
-          <Route path="/usuarios/editar/:id" element={<UserEdit />} />
+          <Route
+            path="/usuarios/editar/:id"
+            element={
+              <RoleRoute allowedRoles={ADMIN}>
+                <UserEdit />
+              </RoleRoute>
+            }
+          />
 
-          <Route path="/prestamos" element={<LoansList />} />
-          <Route path="/prestamos/nuevo" element={<LoanCreate />} />
-          <Route path="/prestamos/editar/:id" element={<LoanEdit />} />
+          <Route
+            path="/categorias"
+            element={
+              <RoleRoute allowedRoles={ADMIN}>
+                <CategoriesList />
+              </RoleRoute>
+            }
+          />
+
+          <Route
+            path="/categorias/nueva"
+            element={
+              <RoleRoute allowedRoles={ADMIN}>
+                <CategoryCreate />
+              </RoleRoute>
+            }
+          />
+
+          <Route
+            path="/categorias/editar/:id"
+            element={
+              <RoleRoute allowedRoles={ADMIN}>
+                <CategoryEdit />
+              </RoleRoute>
+            }
+          />
+
+          <Route
+            path="/libros"
+            element={
+              <RoleRoute allowedRoles={ALL_AUTH}>
+                <BooksList />
+              </RoleRoute>
+            }
+          />
+
+          <Route
+            path="/libros/nuevo"
+            element={
+              <RoleRoute allowedRoles={STAFF}>
+                <BookCreate />
+              </RoleRoute>
+            }
+          />
+
+          <Route
+            path="/libros/editar/:id"
+            element={
+              <RoleRoute allowedRoles={STAFF}>
+                <BookEdit />
+              </RoleRoute>
+            }
+          />
+
+          <Route
+            path="/prestamos"
+            element={
+              <RoleRoute allowedRoles={ALL_AUTH}>
+                <LoansList />
+              </RoleRoute>
+            }
+          />
+
+          <Route
+            path="/prestamos/nuevo"
+            element={
+              <RoleRoute allowedRoles={ALL_AUTH}>
+                <LoanCreate />
+              </RoleRoute>
+            }
+          />
+
+          <Route
+            path="/prestamos/editar/:id"
+            element={
+              <RoleRoute allowedRoles={STAFF}>
+                <LoanEdit />
+              </RoleRoute>
+            }
+          />
+
+          <Route path="*" element={<RoleHome />} />
         </Route>
 
-        <Route
-          path="*"
-          element={
-            localStorage.getItem("token")
-              ? <Navigate to="/dashboard" replace />
-              : <Navigate to="/login" replace />
-          }
-        />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );
