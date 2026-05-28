@@ -110,7 +110,7 @@ export default function BookCreate() {
           </div>
 
           <FormActions
-            cancelTo="/books"
+            cancelTo="/libros"
             submitLabel="Guardar"
             loadingLabel="Guardando..."
             loading={loading}
