@@ -66,7 +66,7 @@ export default function CategoryCreate() {
           />
 
           <FormActions
-            cancelTo="/categories"
+            cancelTo="/categorias"
             submitLabel="Guardar"
             loadingLabel="Guardando..."
             loading={loading}
