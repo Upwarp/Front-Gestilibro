@@ -72,7 +72,7 @@ export default function UserEdit() {
 
       await apiRequest(`/usuarios/${id}`, { method: "PUT", body: JSON.stringify(payload) });
       setSuccess("Usuario actualizado correctamente.");
-      setTimeout(() => navigate("/users"), 1000);
+      setTimeout(() => navigate("/usuarios"), 1000);
     } catch (err) {
       setError(err.message || "No fue posible actualizar el usuario.");
     } finally {
