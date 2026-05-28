@@ -73,7 +73,7 @@ export default function UserCreate() {
           <InputField label="Username" name="username" value={form.username} onChange={handleChange} required />
           <InputField label="Contraseña" name="contrasena" type="password" value={form.contrasena} onChange={handleChange} required />
           <SelectField label="Rol" name="rol" value={form.rol} onChange={handleChange} required placeholder="Seleccione un rol" options={ROL_OPTIONS} />
-          <FormActions cancelTo="/users" submitLabel="Guardar" loadingLabel="Guardando..." loading={loading} />
+          <FormActions cancelTo="/usuarios" submitLabel="Guardar" loadingLabel="Guardando..." loading={loading} />
         </form>
       </FormCard>
     </PageLayout>
