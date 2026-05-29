@@ -15,7 +15,6 @@ export default function UserTableRow({ user, onDelete }) {
       <td>{user.correo}</td>
       <td>{user.username}</td>
       <td>{user.rol ?? ""}</td>
-      <td>{user.pin ?? ""}</td>
       <td>{isActive ? "Sí" : "No"}</td>
       <td className="text-center">
         <TableActions
