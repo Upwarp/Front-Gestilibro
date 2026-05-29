@@ -36,6 +36,7 @@ export default function CategoryCreate() {
       });
       setSuccess("Categoría guardada correctamente.");
       resetForm();
+       setTimeout(() => navigate("/categorias"), 1000);
     } catch (err) {
       setError(err.message || "Error al guardar la categoría.");
     } finally {
