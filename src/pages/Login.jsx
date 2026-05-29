@@ -8,7 +8,7 @@ import RegisterForm from "../components/auth/RegisterForm";
 import PinModal from "../components/auth/PinModal";
 import "./Login.css";
 
-const APP_NAME = "Gestibiblio";
+const APP_NAME = "GestiLibro";
 
 export default function Login() {
   const navigate = useNavigate();
