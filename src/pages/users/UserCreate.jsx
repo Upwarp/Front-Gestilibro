@@ -52,7 +52,7 @@ export default function UserCreate() {
       });
       setSuccess("Usuario guardado correctamente.");
       resetForm();
-      setTimeout(() => navigate("/users"), 1000);
+      setTimeout(() => navigate("/usuarios"), 1000);
     } catch (err) {
       setError(err.message || "No fue posible guardar el usuario.");
     } finally {
