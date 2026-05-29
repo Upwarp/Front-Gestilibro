@@ -58,7 +58,7 @@
               <thead>
                 <tr>
                   <th>ID</th><th>Nombre</th><th>Apellido</th><th>Correo</th>
-                  <th>Username</th><th>Rol</th><th>PIN</th><th>Activo</th>
+                  <th>Username</th><th>Rol</th><th>Activo</th>
                   <th className="text-center">Acciones</th>
                 </tr>
               </thead>
