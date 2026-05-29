@@ -34,7 +34,7 @@ export default function Sidebar() {
       <div>
         <h4 className="sidebar-title">
           <FaBook className="me-2" />
-          <span>Gestibiblio</span>
+          <span>GestiLibro</span>
         </h4>
 
         <div className="sidebar-user">
